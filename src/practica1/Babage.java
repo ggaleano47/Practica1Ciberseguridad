@@ -23,7 +23,7 @@ public class Babage extends javax.swing.JFrame {
 
     private String [][] alfabetoIngles;
     private String [][] alfabeto;
-    private String [] clave;
+    private String clave;
     private List<String> listaRepeticiones;
     private final ArrayList<Integer> listaEspacios = new ArrayList<>();
     private int [] listaOcurrencias;
@@ -37,7 +37,7 @@ public class Babage extends javax.swing.JFrame {
         this.alfabetoIngles = new String [2][26];
         this.alfabeto = new String [2][26];
         this.posicionClaveActual = 0;
-        this.clave = new String []{};
+        this.clave = "";
         this.listaRepeticiones = new ArrayList<>();
         this.listaOcurrencias = new int []{};
         initComponents();
@@ -75,14 +75,13 @@ public class Babage extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         grafica2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        txtClave = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea3 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setSize(new java.awt.Dimension(500, 1000));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -103,7 +102,7 @@ public class Babage extends javax.swing.JFrame {
         textoEncriptado.setRows(5);
         textoEncriptado.setWrapStyleWord(true);
         textoEncriptado.setAutoscrolls(false);
-        textoEncriptado.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        textoEncriptado.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setViewportView(textoEncriptado);
 
         analizar.setText("analizar");
@@ -152,6 +151,11 @@ public class Babage extends javax.swing.JFrame {
         jLabel4.setText("Longitud:");
 
         continuarAnalisis.setText("continuar");
+        continuarAnalisis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                continuarAnalisisActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -264,8 +268,8 @@ public class Babage extends javax.swing.JFrame {
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        jTextField1.setToolTipText("");
-        jTextField1.setEnabled(false);
+        txtClave.setToolTipText("");
+        txtClave.setEnabled(false);
 
         jLabel5.setText("Clave:");
 
@@ -285,7 +289,7 @@ public class Babage extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3)
-                    .addComponent(jTextField1)
+                    .addComponent(txtClave)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton2))
@@ -300,7 +304,7 @@ public class Babage extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
                 .addGap(18, 18, 18)
@@ -390,7 +394,14 @@ public class Babage extends javax.swing.JFrame {
     }//GEN-LAST:event_restarLetraActionPerformed
 
     private void continuarLetraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continuarLetraActionPerformed
+        if (clave.equals("")){
+            clave = alfabeto[0][0];
+        }else{
+            clave = clave +alfabeto[0][0];
+        }
         
+        txtClave.setText(clave + " - ");
+
         this.posicionClaveActual++;
     }//GEN-LAST:event_continuarLetraActionPerformed
 
@@ -400,14 +411,18 @@ public class Babage extends javax.swing.JFrame {
         this.listaEspacios.clear();
         buscarRepetidos(textoEncriptado.getText());
         
-        consultarDatosNuevoAlfabeto();
+        
         
         //TODO Analizar clave
-        this.clave = new String[] {"A","B"};
+
     }//GEN-LAST:event_analizarActionPerformed
 
-//    alfabeto
-    
+    private void continuarAnalisisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continuarAnalisisActionPerformed
+        //grafica el primer cuadro
+        consultarDatosNuevoAlfabeto();
+        
+    }//GEN-LAST:event_continuarAnalisisActionPerformed
+
     private void consultarDatosIngles() {
 
         alfabetoIngles = new String[][] {{"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"}, {"1", "5", "5", "5", "5", "5", "5", "5", "5", "6", "1", "5", "5", "5", "5", "5", "5", "5", "5", "6", "1", "5", "5", "5", "5", "5", "5"}};
@@ -419,6 +434,28 @@ public class Babage extends javax.swing.JFrame {
             {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"},
             {"6", "5", "3", "5", "5", "1", "9", "5", "5", "6", "1", "10", "5", "5", "5", "5", "5", "2", "5", "8", "1", "5", "4", "5", "4", "5", "5"}
         };
+        
+       // String abecedario = "abcdefghijklmnopqrstuvwxyz";
+        int lonAlfabeto = 26;
+        int multiplo = Integer.parseInt(cantidadClave.getText());
+        String cifrado = textoEncriptado.getText();
+        for (int i = 0; i < lonAlfabeto; i++) {
+            int frecuencia = 0;
+            for (int j = 0; j < cifrado.length(); j = j + multiplo) {
+               if (alfabeto[0][i].equals(String.valueOf(cifrado.charAt(j)))){
+                   frecuencia++;
+               }
+            }
+            alfabeto[1][i] = String.valueOf(frecuencia);
+        }
+        
+        for (int i = 0; i < 2; i++) {  
+            for (int j = 0; j < lonAlfabeto; j++) {
+               System.out.print( alfabeto[i][j]);
+            }
+           
+        }
+        
         cargarData(alfabeto, null);
     }
             
@@ -566,11 +603,11 @@ public class Babage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton restarLetra;
     private javax.swing.JButton salirBabage;
     private javax.swing.JButton sumarLetra;
     private javax.swing.JTextArea textoEncriptado;
     private javax.swing.JTextArea textoRepeticiones;
+    private javax.swing.JTextField txtClave;
     // End of variables declaration//GEN-END:variables
 }

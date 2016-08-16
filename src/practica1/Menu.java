@@ -242,6 +242,11 @@ public class Menu extends javax.swing.JFrame {
         
         case "AES":
             System.out.println("AES");
+             /*enviamos la instancia de la ventana principal para que
+          * esta sea Padre de la ventana de dialogo*/
+         Aes aes = new Aes(miMenu);
+          aes.setVisible(true);
+          
         break;
         
         default:
