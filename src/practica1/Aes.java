@@ -6,6 +6,7 @@ package practica1;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.*;
 
 /**
  *
@@ -13,20 +14,32 @@ import java.util.logging.Logger;
  */
 public class Aes extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Aes
-     */
-    public Aes(Menu menu) {
-        try {
-            initComponents();
-            op();      
-        } catch (Exception ex) {
-            Logger.getLogger(Aes.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
+     // String key = "92AE31A79FEEB2A3"; //llave
+    //String iv = "0123456789ABCDEF"; // vector de inicialización
+    private Boolean opcion = true;
+    
+    public void limpiar(){
+        txt1.setText("");
+        txt2.setText("");
+        txtClave.setText("");
+        txtVectorInit.setText("");
     }
-
+    public void cambiarLabel(){
+         if (opcion){
+                lbl1.setText("Ingrese el texto que desea encriptar");
+                lbl2.setText("Texto cifrado");
+            } else {
+                lbl1.setText("Ingrese el texto cifrado que desea desencriptar");
+                lbl2.setText("Texto desencriptado");
+            }
+    }
+    
+    public Aes(Menu menu) { 
+        
+            initComponents();
+            cambiarLabel();
+           
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,36 +49,223 @@ public class Aes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        grupoOpcion = new javax.swing.ButtonGroup();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txt1 = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txt2 = new javax.swing.JTextArea();
+        txtClave = new javax.swing.JTextField();
+        txtVectorInit = new javax.swing.JTextField();
+        btnEjecutar = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        rbtnEncriptar = new javax.swing.JRadioButton();
+        rbtnDesencriptar = new javax.swing.JRadioButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        lbl1 = new javax.swing.JLabel();
+        lbl2 = new javax.swing.JLabel();
+        btnLimpiar = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        txt1.setColumns(20);
+        txt1.setRows(5);
+        jScrollPane1.setViewportView(txt1);
+
+        txt2.setEditable(false);
+        txt2.setColumns(20);
+        txt2.setRows(5);
+        jScrollPane2.setViewportView(txt2);
+
+        txtClave.setToolTipText("");
+
+        btnEjecutar.setText("Ejecutar");
+        btnEjecutar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEjecutarActionPerformed(evt);
+            }
+        });
+
+        grupoOpcion.add(rbtnEncriptar);
+        rbtnEncriptar.setSelected(true);
+        rbtnEncriptar.setText("Encriptar");
+        rbtnEncriptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnEncriptarActionPerformed(evt);
+            }
+        });
+
+        grupoOpcion.add(rbtnDesencriptar);
+        rbtnDesencriptar.setText("Desencriptar");
+        rbtnDesencriptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnDesencriptarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rbtnDesencriptar)
+                    .addComponent(rbtnEncriptar))
+                .addContainerGap(7, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(rbtnEncriptar)
+                .addGap(18, 18, 18)
+                .addComponent(rbtnDesencriptar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jLabel1.setText("Ingrese la clave");
+
+        jLabel2.setText("Ingrese el vector de iniciacion");
+
+        lbl1.setText("jLabel3");
+
+        lbl2.setText("jLabel3");
+
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtVectorInit, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtClave, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(lbl1)
+                            .addComponent(lbl2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnEjecutar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnLimpiar)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtVectorInit, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(lbl1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(lbl2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEjecutar)
+                    .addComponent(btnLimpiar))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void rbtnEncriptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnEncriptarActionPerformed
+        opcion = true;
+        cambiarLabel();
+    }//GEN-LAST:event_rbtnEncriptarActionPerformed
+
+    private void rbtnDesencriptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnDesencriptarActionPerformed
+        opcion = false;
+        cambiarLabel();
+    }//GEN-LAST:event_rbtnDesencriptarActionPerformed
+
+    public void ejecutar(String key,String iv){
+        
+        EncriptAES aes = new EncriptAES();
+        if (opcion) {
+            try {
+                String texto = txt1.getText();
+                String encriptado = aes.encrypt(key, iv, texto);
+                txt2.setText("Texto encriptado: " + encriptado);
+            } catch (Exception ex) {
+                Logger.getLogger(Aes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            try {
+                String encriptado = txt1.getText();
+                String texto = aes.decrypt(key, iv, encriptado);
+                txt2.setText("Texto desencriptado: " + texto);
+            } catch (Exception ex) {
+                Logger.getLogger(Aes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    private void btnEjecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEjecutarActionPerformed
+        if (!txtClave.getText().equals("") && !txtVectorInit.getText().equals("") && !txt1.getText().equals("")) {
+            String key = txtClave.getText(); //llave
+            String iv = txtVectorInit.getText(); // vector de inicializacion
+            ejecutar(key, iv);
+        }else {
+            JOptionPane.showMessageDialog(null, "No pueden haber campos vacios");
+        }
+
+        
+    }//GEN-LAST:event_btnEjecutarActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        // TODO add your handling code here:
+        limpiar();
+        
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void op () throws Exception{
-        String key = "92AE31A79FEEB2A3"; //llave
- String iv = "0123456789ABCDEF"; // vector de inicialización
- String cleartext = "hola";
- EncriptAES aes = new EncriptAES();
- 
- System.out.println("Texto encriptado: "+aes.encrypt(key, iv,cleartext));
- System.out.println("Texto desencriptado: "+aes.decrypt(key, iv,aes.encrypt(key, iv,cleartext)));
- 
-            }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEjecutar;
+    private javax.swing.JButton btnLimpiar;
+    private javax.swing.ButtonGroup grupoOpcion;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lbl1;
+    private javax.swing.JLabel lbl2;
+    private javax.swing.JRadioButton rbtnDesencriptar;
+    private javax.swing.JRadioButton rbtnEncriptar;
+    private javax.swing.JTextArea txt1;
+    private javax.swing.JTextArea txt2;
+    private javax.swing.JTextField txtClave;
+    private javax.swing.JTextField txtVectorInit;
     // End of variables declaration//GEN-END:variables
 }
