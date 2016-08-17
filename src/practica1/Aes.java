@@ -36,6 +36,8 @@ public class Aes extends javax.swing.JFrame {
     
     public Aes(Menu menu) { 
         
+        //txtClave.setText("92AE31A79FEEB2A3");
+        //txtVectorInit.setText("0123456789ABCDEF");
             initComponents();
             cambiarLabel();
            

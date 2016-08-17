@@ -238,6 +238,8 @@ public class Menu extends javax.swing.JFrame {
  
         case "DES":
             System.out.println("DES");
+            DESVew des = new DESVew(miMenu);
+            des.setVisible(true);
         break;
         
         case "AES":
