@@ -28,19 +28,26 @@ public class Metodos {
 
     public String procesoTresDES(String llave, int accion, String texto) throws Exception {
 
+         
+	    
+	    
+	 	
+        
         try {
-            TresDES tresDes = new TresDES(llave);
+            //TresDES tresDes = new TresDES(llave);
             // accion vale 1 para desencriptar y 2 para encriptar
             switch (accion) {
                 case 1:
-                    texto = tresDes.decrypt(texto);
+                    texto = new TresDES()._decrypt(texto, llave);
+                    //texto = tresDes.decrypt(texto);
                     break;
                 case 2:
-                    texto = tresDes.encrypt(texto);
+                    texto = new TresDES()._encrypt(texto, llave);
+                    //texto = tresDes.encrypt(texto);
                     break;
             }
         } catch (Exception e) {
-            System.out.println("Por favor ingrese una llave correcta");
+            System.out.println("Por favor ingrese una llave correcta para 3DES");
         }
         return texto;
     }
