@@ -18,7 +18,7 @@ import sun.misc.BASE64Encoder;
 
 @SuppressWarnings("restriction")
 public class TresDES {
-
+/*
     public String _encrypt(String message, String secretKey) throws Exception {
 	
 		MessageDigest md = MessageDigest.getInstance("SHA-1");
@@ -53,8 +53,8 @@ public class TresDES {
 		
 		return new String(plainText, "UTF-8");
 	}
+    */
     
-    /*
     static Cipher TresDESCipherEncrypt;
     static Cipher TresDESCipherDecrypt;
     
@@ -94,5 +94,5 @@ public class TresDES {
         }
         return decryptedText;
     }
-    */
+    
 }

@@ -34,16 +34,16 @@ public class Metodos {
 	 	
         
         try {
-            //TresDES tresDes = new TresDES(llave);
+            TresDES tresDes = new TresDES(llave);
             // accion vale 1 para desencriptar y 2 para encriptar
             switch (accion) {
                 case 1:
-                    texto = new TresDES()._decrypt(texto, llave);
-                    //texto = tresDes.decrypt(texto);
+                    //texto = new TresDES()._decrypt(texto, llave);
+                    texto = tresDes.decrypt(texto);
                     break;
                 case 2:
-                    texto = new TresDES()._encrypt(texto, llave);
-                    //texto = tresDes.encrypt(texto);
+                    //texto = new TresDES()._encrypt(texto, llave);
+                    texto = tresDes.encrypt(texto);
                     break;
             }
         } catch (Exception e) {

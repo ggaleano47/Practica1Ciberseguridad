@@ -376,11 +376,13 @@ public class Babage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //boton para cerrar el metodo de babage
     private void salirBabageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirBabageActionPerformed
         setVisible(false);
         dispose();
     }//GEN-LAST:event_salirBabageActionPerformed
 
+    //boton del grafico para mover las letras a la derecha
     private void sumarLetraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sumarLetraActionPerformed
         String ultimoLetras = alfabeto[0][25];
         String ultimoValor = alfabeto[1][25];
@@ -394,6 +396,8 @@ public class Babage extends javax.swing.JFrame {
         cargarData(alfabeto, null);
     }//GEN-LAST:event_sumarLetraActionPerformed
 
+    
+    //boton del grafico para mover las letras a la izquierda
     private void restarLetraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restarLetraActionPerformed
         String primeroLetras = alfabeto[0][0];
         String primeroValor = alfabeto[1][0];
@@ -407,6 +411,7 @@ public class Babage extends javax.swing.JFrame {
         cargarData(alfabeto, null);
     }//GEN-LAST:event_restarLetraActionPerformed
 
+    //metodo del grafico para continuar representado con un ok
     private void continuarLetraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continuarLetraActionPerformed
         if (clave.equals("")){
             clave = alfabeto[0][0];
@@ -419,14 +424,14 @@ public class Babage extends javax.swing.JFrame {
         this.posicionClaveActual++;
     }//GEN-LAST:event_continuarLetraActionPerformed
 
+    
     private void analizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analizarActionPerformed
         this.posicionClaveActual = 1;
         this.listaRepeticiones.clear();
         this.listaEspacios.clear();
         buscarRepetidos(textoEncriptado.getText());
-        
-        
-        
+       
+        //textoRepeticiones.setText(repeticiones.toString());
         //TODO Analizar clave
 
     }//GEN-LAST:event_analizarActionPerformed
@@ -506,6 +511,9 @@ public class Babage extends javax.swing.JFrame {
         }
         
     }
+    
+    
+    //------------------Se remplaza por BabageModel.buscarRepetidos
     
     public void buscarRepetidos(String textoInicial){
         
