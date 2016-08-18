@@ -77,7 +77,7 @@ public class Babage extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         txtClave = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        desencriptar = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea3 = new javax.swing.JTextArea();
         btnAtras = new javax.swing.JButton();
@@ -104,6 +104,11 @@ public class Babage extends javax.swing.JFrame {
         textoEncriptado.setWrapStyleWord(true);
         textoEncriptado.setAutoscrolls(false);
         textoEncriptado.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        textoEncriptado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textoEncriptadoKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(textoEncriptado);
 
         analizar.setText("analizar");
@@ -143,6 +148,7 @@ public class Babage extends javax.swing.JFrame {
 
         jScrollPane2.setAutoscrolls(true);
 
+        textoRepeticiones.setEditable(false);
         textoRepeticiones.setColumns(20);
         textoRepeticiones.setLineWrap(true);
         textoRepeticiones.setRows(5);
@@ -150,6 +156,17 @@ public class Babage extends javax.swing.JFrame {
         jScrollPane2.setViewportView(textoRepeticiones);
 
         jLabel4.setText("Longitud:");
+
+        cantidadClave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cantidadClaveActionPerformed(evt);
+            }
+        });
+        cantidadClave.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cantidadClaveKeyTyped(evt);
+            }
+        });
 
         continuarAnalisis.setText("continuar");
         continuarAnalisis.addActionListener(new java.awt.event.ActionListener() {
@@ -191,6 +208,8 @@ public class Babage extends javax.swing.JFrame {
                         .addComponent(jLabel4)))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
+
+        jPanel3.setEnabled(false);
 
         grafica1.setBackground(new java.awt.Color(51, 153, 255));
         grafica1.setLayout(new java.awt.BorderLayout());
@@ -249,6 +268,8 @@ public class Babage extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
+        jPanel4.setEnabled(false);
+
         grafica2.setBackground(new java.awt.Color(51, 153, 255));
         grafica2.setLayout(new java.awt.BorderLayout());
 
@@ -274,7 +295,8 @@ public class Babage extends javax.swing.JFrame {
 
         jLabel5.setText("Clave:");
 
-        jButton2.setText("Desencriptar");
+        desencriptar.setText("Desencriptar");
+        desencriptar.setEnabled(false);
 
         jTextArea3.setEditable(false);
         jTextArea3.setColumns(20);
@@ -293,7 +315,7 @@ public class Babage extends javax.swing.JFrame {
                     .addComponent(txtClave)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2))
+                        .addComponent(desencriptar))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -307,7 +329,7 @@ public class Babage extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(desencriptar)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3)
                 .addContainerGap())
@@ -420,8 +442,16 @@ public class Babage extends javax.swing.JFrame {
         }
         
         txtClave.setText(clave + " - ");
-
-        this.posicionClaveActual++;
+        if(this.posicionClaveActual >= Integer.parseInt(cantidadClave.getText())){
+            continuarLetra.setEnabled(false);
+            sumarLetra.setEnabled(false);
+            restarLetra.setEnabled(false);
+            desencriptar.setEnabled(true);
+            txtClave.setText(clave);
+        } else{
+            continuarLetra.setEnabled(true);
+            this.posicionClaveActual++;
+        }
     }//GEN-LAST:event_continuarLetraActionPerformed
 
     
@@ -439,7 +469,8 @@ public class Babage extends javax.swing.JFrame {
     private void continuarAnalisisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continuarAnalisisActionPerformed
         //grafica el primer cuadro
         consultarDatosNuevoAlfabeto();
-        
+        jPanel3.setEnabled(true);
+        jPanel4.setEnabled(true);
     }//GEN-LAST:event_continuarAnalisisActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
@@ -447,15 +478,37 @@ public class Babage extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnAtrasActionPerformed
 
+    private void cantidadClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cantidadClaveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cantidadClaveActionPerformed
+
+    private void cantidadClaveKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cantidadClaveKeyTyped
+        char c=evt.getKeyChar();        
+        if(Character.isLetter(c)) { 
+            getToolkit().beep();           
+            evt.consume();           
+        } 
+    }//GEN-LAST:event_cantidadClaveKeyTyped
+
+    private void textoEncriptadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textoEncriptadoKeyTyped
+        char c=evt.getKeyChar(); 
+        if(Character.isDigit(c)) { 
+            getToolkit().beep(); 
+            evt.consume(); 
+        }
+    }//GEN-LAST:event_textoEncriptadoKeyTyped
+
     private void consultarDatosIngles() {
 
-        alfabetoIngles = new String[][] {{"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"}, {"1", "5", "5", "5", "5", "5", "5", "5", "5", "6", "1", "5", "5", "5", "5", "5", "5", "5", "5", "6", "1", "5", "5", "5", "5", "5", "5"}};
+        alfabetoIngles = new String[][] {
+            {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"},
+            {"1", "5", "5", "5", "5", "5", "5", "5", "5", "6", "1", "5", "5", "5", "5", "5", "5", "5", "5", "6", "1", "5", "5", "5", "5", "5", "5"}};
         cargarData(alfabetoIngles, "AlfabetoIngles");
     }
     
     private void consultarDatosNuevoAlfabeto() {
         alfabeto = new String[][] {
-            {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"},
+            {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"},
             {"6", "5", "3", "5", "5", "1", "9", "5", "5", "6", "1", "10", "5", "5", "5", "5", "5", "2", "5", "8", "1", "5", "4", "5", "4", "5", "5"}
         };
         
@@ -512,9 +565,6 @@ public class Babage extends javax.swing.JFrame {
         
     }
     
-    
-    //------------------Se remplaza por BabageModel.buscarRepetidos
-    
     public void buscarRepetidos(String textoInicial){
         
         int cantMax = textoInicial.length()/2;
@@ -533,18 +583,15 @@ public class Babage extends javax.swing.JFrame {
                     for (int i = -1; (i = textoInicial.indexOf(palabraActual, i + 1)) != -1; ) { 
                         listaIndicesOcurrenciasPalabra.add(i);
                     }
+                    
+                    List<Integer> listaDiferencias = new ArrayList<>();
+                    listaDiferencias = obtenerLista(listaIndicesOcurrenciasPalabra);
 
-                    //TODO Solo funciona con máximo 2 ocurrencias por palabra
-                    if(listaIndicesOcurrenciasPalabra.size() >= 2){
+                    
+                    for (Integer integer : listaDiferencias) {
                         listaRepeticiones.add(palabraActual);
-                        listaEspacios.add(listaIndicesOcurrenciasPalabra.get(1) - listaIndicesOcurrenciasPalabra.get(0));
+                        listaEspacios.add(integer);
                     }
-
-//                    for (int i = 0; i < listaIndicesOcurrenciasPalabra.size(); i++) {
-//
-//                        listaRepeticiones.add(palabraActual);
-//                        listaEspacios.add(listaIndicesOcurrenciasPalabra.get(1) - listaIndicesOcurrenciasPalabra.get(0));
-//                    }
 
                 }
                 
@@ -567,6 +614,41 @@ public class Babage extends javax.swing.JFrame {
     
     }
     
+    // Método que recibe una lista de enteros y devuelve una lista de diferencias entre ellos, 
+    // incluyendo todas las combinaciones posibles sin repetir.
+    public static List<Integer> obtenerLista(List<Integer> lista){
+      List<Integer> listaDiferencia = new ArrayList<>();
+      for (int i = 0; i < lista.size(); i++) {
+        listaDiferencia.addAll(obtenerDiferencias(i, lista, listaDiferencia));
+      }
+      return listaDiferencia;
+    }
+
+    public static List<Integer> obtenerDiferencias( int posicion, List<Integer> lista, List<Integer> listaDiferencia){
+      List<Integer> nuevaLista = new ArrayList<>();
+      int numeroComparar = lista.get(posicion);
+
+      for (int i = 0; i < lista.size(); i++) {
+        if(i > posicion && i < lista.size()){
+          int numero = lista.get(i) - numeroComparar;
+          if(!numeroRepetido(numero, listaDiferencia)){
+            nuevaLista.add(
+                lista.get(i) - numeroComparar);
+          }
+        }
+      }
+      return nuevaLista;
+    }
+
+    public static boolean numeroRepetido(int numero, List<Integer> lista){
+      for (Integer integer : lista) {
+        if(numero == integer){
+          return true;
+        }
+      }
+      return false;
+    }
+    
     private static String factores(int numero)
     {
         StringBuilder factores = new StringBuilder();
@@ -580,16 +662,13 @@ public class Babage extends javax.swing.JFrame {
         if (factores.charAt(factores.length()-1) == ' '){
             factores.setLength(factores.length() - 2);
         } 
-           
+        
         return factores.toString();
     }
     
     private boolean verificarRepeticiones(String repeticionActual) { 
         for (String repeticion : listaRepeticiones) {
             if (repeticionActual.equals(repeticion)){
-                return false;
-            }
-            if(contarOcurrencias(repeticion, repeticionActual) > 0){
                 return false;
             }
         }
@@ -614,9 +693,9 @@ public class Babage extends javax.swing.JFrame {
     private javax.swing.JTextField cantidadClave;
     private javax.swing.JButton continuarAnalisis;
     private javax.swing.JButton continuarLetra;
+    private javax.swing.JButton desencriptar;
     private javax.swing.JPanel grafica1;
     private javax.swing.JPanel grafica2;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
