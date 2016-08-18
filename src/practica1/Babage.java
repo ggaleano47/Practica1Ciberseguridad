@@ -188,7 +188,7 @@ public class Babage extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(cantidadClave, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
                         .addComponent(continuarAnalisis))
                     .addComponent(jScrollPane2))
                 .addContainerGap())
@@ -297,6 +297,11 @@ public class Babage extends javax.swing.JFrame {
 
         desencriptar.setText("Desencriptar");
         desencriptar.setEnabled(false);
+        desencriptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                desencriptarActionPerformed(evt);
+            }
+        });
 
         jTextArea3.setEditable(false);
         jTextArea3.setColumns(20);
@@ -497,6 +502,15 @@ public class Babage extends javax.swing.JFrame {
             evt.consume(); 
         }
     }//GEN-LAST:event_textoEncriptadoKeyTyped
+
+    private void desencriptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desencriptarActionPerformed
+        // TODO add your handling code here:
+        BabageDesencriptar bg = new BabageDesencriptar();
+        String alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String[][] matriz = new String[27][26];
+        matriz = bg.llenarMatriz(matriz, alfabeto);
+        String texto = bg.desencriptar(txtClave.getText(), matriz, textoEncriptado.getText());
+    }//GEN-LAST:event_desencriptarActionPerformed
 
     private void consultarDatosIngles() {
 

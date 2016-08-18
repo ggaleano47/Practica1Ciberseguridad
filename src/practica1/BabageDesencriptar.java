@@ -11,15 +11,7 @@ package practica1;
  */
 public class BabageDesencriptar {
 
-    public static void main(String[] args) {
-        String[][] matriz = new String[27][26];
-        String alfabeto = "abcdefghijklmnopqrstuvwxyz";
-        matriz = llenarMatriz(matriz, alfabeto);
-        String cifrado = "dpryev";
-        String texto = desencriptar("king", matriz, cifrado);
-    }
-
-    public static String desencriptar(String clave, String[][] m, String textoCifrado) {
+    public  String desencriptar(String clave, String[][] m, String textoCifrado) {
         String texto = "";
         int j = 0;
         for (int i = 0; i < textoCifrado.length(); i++) {
@@ -49,7 +41,7 @@ public class BabageDesencriptar {
     }
 
 //llenar la matriz con el alfabeto    
-    public static String cambiarAlfabeto(String a) {
+    public  String cambiarAlfabeto(String a) {
         String n = "";
         for (int i = 1; i < a.length() ; i++) {
             if(n.equals("")){
@@ -62,7 +54,7 @@ public class BabageDesencriptar {
         return n;
     }
 
-    public static String[][] llenarMatriz(String[][] m, String alfabeto) {
+    public  String[][] llenarMatriz(String[][] m, String alfabeto) {
         for (int i = 0; i < 27; i++) {
             int j = 0;
             try {
