@@ -21,8 +21,7 @@ public class Aes extends javax.swing.JFrame {
     public void limpiar(){
         txt1.setText("");
         txt2.setText("");
-        txtClave.setText("");
-        txtVectorInit.setText("");
+
     }
     public void cambiarLabel(){
          if (opcion){
@@ -81,7 +80,10 @@ public class Aes extends javax.swing.JFrame {
         txt2.setRows(5);
         jScrollPane2.setViewportView(txt2);
 
+        txtClave.setText("92AE31A79FEEB2A3");
         txtClave.setToolTipText("");
+
+        txtVectorInit.setText("0123456789ABCDEF");
 
         btnEjecutar.setText("Ejecutar");
         btnEjecutar.addActionListener(new java.awt.event.ActionListener() {

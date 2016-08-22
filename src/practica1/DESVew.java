@@ -36,6 +36,7 @@ public class DESVew extends javax.swing.JFrame {
         initComponents();
         cambiarLabel();
         
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -306,12 +307,14 @@ public class DESVew extends javax.swing.JFrame {
     private void rbtnDESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnDESActionPerformed
         // TODO add your handling code here:
         opcionMetodo = true;
+        txtClave.setText("IHCkrmhA9Gs");
         cambiarLabel();
     }//GEN-LAST:event_rbtnDESActionPerformed
 
     private void rbtn3DESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtn3DESActionPerformed
         // TODO add your handling code here:
         opcionMetodo = false;
+        txtClave.setText("ThisIsSecretEncryptionKey");
         cambiarLabel();
     }//GEN-LAST:event_rbtn3DESActionPerformed
 

@@ -27,12 +27,7 @@ public class Metodos {
     }
 
     public String procesoTresDES(String llave, int accion, String texto) throws Exception {
-
-         
-	    
-	    
-	 	
-        
+// "ThisIsSecretEncryptionKey"
         try {
             TresDES tresDes = new TresDES(llave);
             // accion vale 1 para desencriptar y 2 para encriptar

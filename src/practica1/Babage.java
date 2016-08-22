@@ -41,7 +41,8 @@ public class Babage extends javax.swing.JFrame {
         this.listaRepeticiones = new ArrayList<>();
         this.listaOcurrencias = new int []{};
         initComponents();
-        consultarDatosIngles();
+        
+        
     }
 
     /**
@@ -79,7 +80,7 @@ public class Babage extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         desencriptar = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
+        txtMensaje = new javax.swing.JTextArea();
         btnAtras = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -303,11 +304,11 @@ public class Babage extends javax.swing.JFrame {
             }
         });
 
-        jTextArea3.setEditable(false);
-        jTextArea3.setColumns(20);
-        jTextArea3.setLineWrap(true);
-        jTextArea3.setRows(5);
-        jScrollPane3.setViewportView(jTextArea3);
+        txtMensaje.setEditable(false);
+        txtMensaje.setColumns(20);
+        txtMensaje.setLineWrap(true);
+        txtMensaje.setRows(5);
+        jScrollPane3.setViewportView(txtMensaje);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -461,6 +462,7 @@ public class Babage extends javax.swing.JFrame {
 
     
     private void analizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analizarActionPerformed
+        consultarDatosIngles();
         this.posicionClaveActual = 1;
         this.listaRepeticiones.clear();
         this.listaEspacios.clear();
@@ -509,14 +511,19 @@ public class Babage extends javax.swing.JFrame {
         String alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         String[][] matriz = new String[27][26];
         matriz = bg.llenarMatriz(matriz, alfabeto);
-        String texto = bg.desencriptar(txtClave.getText(), matriz, textoEncriptado.getText());
+        String texto = bg.desencriptar(clave, matriz, textoEncriptado.getText());
+        txtMensaje.setText(texto);
     }//GEN-LAST:event_desencriptarActionPerformed
 
     private void consultarDatosIngles() {
-
+        double longitudTxtEncriptado = textoEncriptado.getText().length();
         alfabetoIngles = new String[][] {
             {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"},
-            {"1", "5", "5", "5", "5", "5", "5", "5", "5", "6", "1", "5", "5", "5", "5", "5", "5", "5", "5", "6", "1", "5", "5", "5", "5", "5", "5"}};
+           {"6", "1", "2", "3", "9", "2", "1", "5", "5", "0", "1", "3", "2", "5", "6", "1", "0", "4", "5", "7", "2", "1", "2", "0", "1", "0"}};
+        double[] vProbabilidad = new double[]{8.167, 1.492, 2.182, 4.253, 12.702, 2.228, 2.015, 6.094, 6.966, 0.153, 0.772, 4.025, 2.406, 6.749, 7.507, 1.929, 0.095, 5.987, 6.327, 9.056, 2.758, 0.978, 2.360, 0.250, 1.974, 0.074};
+        for (int i = 0; i < 26; i++) {
+            alfabetoIngles[1][i] = String.valueOf((int)((vProbabilidad[i]* longitudTxtEncriptado)/100));
+        }
         cargarData(alfabetoIngles, "AlfabetoIngles");
     }
     
@@ -723,12 +730,12 @@ public class Babage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea3;
     private javax.swing.JButton restarLetra;
     private javax.swing.JButton salirBabage;
     private javax.swing.JButton sumarLetra;
     private javax.swing.JTextArea textoEncriptado;
     private javax.swing.JTextArea textoRepeticiones;
     private javax.swing.JTextField txtClave;
+    private javax.swing.JTextArea txtMensaje;
     // End of variables declaration//GEN-END:variables
 }
